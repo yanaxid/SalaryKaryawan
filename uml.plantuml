@@ -1,0 +1,84 @@
+@startuml
+
+
+
+
+
+abstract class Person{
+-name : String
+-adress : String
+-Age : int
+}
+
+
+class Employee{
+
+-EmployeeId : String
+-salary : double 
+-jobDesc : String
+-placement : Placement
+}
+
+
+
+class EmployeePosition {
+	
+-employeePosition : String;
+-salaryPercentage : int;
+
+}
+
+class Programmer{
+-programmingLanguage : String
+-experiences  :int
+-allowance : double
+}
+
+class ProjectLeader{
+-totalProject   :int
+-allowance : double
+}
+
+class Analyst{
+-Allowance : double
+}
+
+class Placement{
+-kota :string
+-umk :double
+}
+
+
+interface ISalaryCalculation{
++calculateSalary()
+}
+
+interface IProgrammerAllowance{
++calculateProgrammerAllowance()
+}
+
+
+interface IProjectLeaderAllowance{
++calculateProjectLeaderAllowance()
+}
+
+interface IAnalystrAllowance{
++
++calculateAnalystAllowance()
+}
+
+Analyst .down.|> IAnalystrAllowance
+Programmer .down.|> IProgrammerAllowance
+ProjectLeader .down.|> IProjectLeaderAllowance
+
+
+
+Employee .up.|> ISalaryCalculation
+Employee -up-|> Person
+Programmer -up-|> Employee
+ProjectLeader -up-|> Employee
+Analyst -up-|> Employee
+
+
+
+@enduml
