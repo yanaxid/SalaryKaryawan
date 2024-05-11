@@ -353,7 +353,6 @@ public class MenuEditEmployee {
 			} else {
 				setting += separator + " %-" + listColumnWidht[i] + "s ";
 			}
-
 		}
 		setting += "|";
 
@@ -368,7 +367,6 @@ public class MenuEditEmployee {
 				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5], dataTable.get(i)[6], dataTable.get(i)[7], dataTable.get(i)[8], dataTable.get(i)[9]);
 				System.out.println();
 			}
-
 		}
 		System.out.println("   " + lines);
 	}

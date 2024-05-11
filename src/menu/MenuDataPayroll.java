@@ -60,7 +60,9 @@ public class MenuDataPayroll {
 		int columnCount = 0;
 
 		int no = 1;
-		double totalPayroll = 0;
+		double totalSalary = 0;
+		double totalAlowance = 0;
+		
 		for (int i = 0; i < employees.size(); i++) {
 
 			Employee e = employees.get(i);
@@ -74,14 +76,17 @@ public class MenuDataPayroll {
 			String allowance = "";
 			if (e instanceof Programmer) {
 				allowance = String.format("%,.0f", (double) ((Programmer) e).getAllowance());
+				totalAlowance += ((Programmer) e).getAllowance();
 			}
 
 			else if (e instanceof ProjectLeader) {
 				allowance = String.format("%,.0f", (double) ((ProjectLeader) e).getAllowance());
+				totalAlowance += ((ProjectLeader) e).getAllowance();
 			}
 
 			else if (e instanceof Analyst) {
 				allowance = String.format("%,.0f", (double) ((Analyst) e).getAllowance());
+				totalAlowance += ((Analyst) e).getAllowance();
 			}
 
 			else if (!(e instanceof Analyst) && !(e instanceof Programmer) && !(e instanceof ProjectLeader)) {
@@ -92,10 +97,13 @@ public class MenuDataPayroll {
 			String[] tableBody = { String.valueOf(no), e.getEmployeeId(), e.getName(), e.getPlacement().getCity(), allowance, String.format("%,.0f", (double) e.getSalary()) };
 			dataTable.add(tableBody);
 
-			totalPayroll += e.getSalary();
+			totalSalary += e.getSalary();
+			
+			
+			
 			if (dataTable.size() > employees.size()) {
 
-				String[] tableHeading = { "", "", "", "", "Total", String.format("%,.0f", (double) totalPayroll) };
+				String[] tableHeading = { "", "", "", "", "Total Payroll", String.format("%,.0f", (double) totalSalary + totalAlowance) };
 				dataTable.add(tableHeading);
 			}
 

@@ -3,7 +3,10 @@ package menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import person.employee.Analyst;
 import person.employee.Employee;
+import person.employee.Programmer;
+import person.employee.ProjectLeader;
 
 public class MenuDisplayEmployees {
 
@@ -52,8 +55,6 @@ public class MenuDisplayEmployees {
 
 	}
 
-	
-
 	public void createTableEmployee(List<Employee> employees) {
 
 		List<String[]> dataTable = new ArrayList<>();
@@ -64,17 +65,26 @@ public class MenuDisplayEmployees {
 		for (Employee e : employees) {
 
 			if (dataTable.size() == 0) {
-				String[] tableHeading = { "No", "Employee ID", "Nama", "Address", "Age", "jobDesc", "Placement" };
+				String[] tableHeading = { "No", "Employee ID", "Nama", "Address", "Age", "Placement", "JobDesk", "Dll" };
 				columnCount = tableHeading.length;
 				dataTable.add(tableHeading);
 			}
-			String[] tableBody = { String.valueOf(no), e.getEmployeeId(), e.getName(), e.getAdress(), String.valueOf(e.getAge()), e.getJobDesc(), e.getPlacement().getCity() };
+
+			String dll = "-";
+
+			if (e instanceof Programmer) {
+				dll = "Programm_Lang : " + ((Programmer) e).getProgrammingLanguage() + ", Experience : " + ((Programmer) e).getExperiences();
+			}
+
+			else if (e instanceof ProjectLeader) {
+				dll = "Total Project : " + ((ProjectLeader) e).getTotalProject();
+			}
+
+			String[] tableBody = { String.valueOf(no), e.getEmployeeId(), e.getName(), e.getAdress(), String.valueOf(e.getAge()), e.getPlacement().getCity(), e.getJobDesc(), dll };
 			dataTable.add(tableBody);
 			no++;
 
 		}
-
-
 
 		// get column width
 		int[] listColumnWidht = new int[columnCount];
@@ -112,7 +122,9 @@ public class MenuDisplayEmployees {
 		//
 		String setting = "";
 		for (int i = 0; i < listColumnWidht.length; i++) {
+
 			setting += separator + " %-" + listColumnWidht[i] + "s ";
+
 		}
 		setting += "|";
 
@@ -120,16 +132,16 @@ public class MenuDisplayEmployees {
 		System.out.println("   " + lines);
 		for (int i = 0; i < dataTable.size(); i++) {
 			if (i == 0) {
-				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5], dataTable.get(i)[6]);
+				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5], dataTable.get(i)[6],
+						dataTable.get(i)[7]);
 				System.out.println();
 				System.out.println("   " + lines);
 			} else {
-				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5], dataTable.get(i)[6]);
+				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5], dataTable.get(i)[6],
+						dataTable.get(i)[7]);
 				System.out.println();
 			}
-
 		}
 		System.out.println("   " + lines);
 	}
-
 }
