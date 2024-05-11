@@ -120,6 +120,7 @@ public class MenuEditEmployee {
 					String o = emp.getName();
 					emp.setName(name);
 					mainMenu.displaySuccessMessage("   Berhasil merubah nama "+ emp.getEmployeeId()+" : "+o+" > " +emp.getName());
+					showEditEmployee(mainMenu);
 					break;
 
 				}
@@ -130,6 +131,7 @@ public class MenuEditEmployee {
 					String o = emp.getAdress();
 					emp.setAdress(address);
 					mainMenu.displaySuccessMessage("   Berhasil merubah address "+ emp.getEmployeeId()+" : "+o+" > " +emp.getAdress());
+					showEditEmployee(mainMenu);
 					break;
 				}
 				case 3: {
@@ -139,6 +141,7 @@ public class MenuEditEmployee {
 					int o = emp.getAge();
 					emp.setAge(age);
 					mainMenu.displaySuccessMessage("   Berhasil merubah address "+ emp.getEmployeeId()+" : "+o+" > " +emp.getAge());
+					showEditEmployee(mainMenu);
 					break;
 				}
 				case 4: {
@@ -166,6 +169,7 @@ public class MenuEditEmployee {
 					}
 					
 					mainMenu.displaySuccessMessage("   Berhasil merubah placement "+ emp.getEmployeeId()+" : "+o+" > " +emp.getPlacement().getCity());
+					showEditEmployee(mainMenu);
 					break;
 
 				}
@@ -175,6 +179,7 @@ public class MenuEditEmployee {
 					String o = emp.getJobDesc();
 					emp.setJobDesc(jobDesc);
 					mainMenu.displaySuccessMessage("   Berhasil merubah Jobdesc "+ emp.getEmployeeId()+" : "+o+" > " +emp.getJobDesc());
+					showEditEmployee(mainMenu);
 					break;
 				}case 0: {
 					showEditEmployee(mainMenu);
@@ -201,7 +206,7 @@ public class MenuEditEmployee {
 				
 			}
 			
-			showEditEmployee(mainMenu);
+//			showEditEmployee(mainMenu);
 		}
 
 	}

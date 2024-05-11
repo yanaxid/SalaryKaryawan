@@ -41,15 +41,15 @@ public class MenuDataPayroll {
 		int x = mainMenu.getUiv().validateUserInputNumber("   -> ", "   Inputkan harus angka!");
 
 		switch (x) {
-		case 0: {
-			mainMenu.mainMenu();
-			break;
-		}
-		default: {
-			mainMenu.displayErrorMessage("   Inputan tidak sesuai daftar menu!");
-			showTablePayroll(mainMenu);
-			break;
-		}
+			case 0: {
+				mainMenu.mainMenu();
+				break;
+			}
+			default: {
+				mainMenu.displayErrorMessage("   Inputan tidak sesuai daftar menu!");
+				showTablePayroll(mainMenu);
+				break;
+			}
 		}
 	}
 
@@ -60,43 +60,45 @@ public class MenuDataPayroll {
 		int columnCount = 0;
 
 		int no = 1;
+		double totalPayroll = 0;
+		for (int i = 0; i < employees.size(); i++) {
 
-		for (int i = 1; i < employees.size(); i++) {
-
-		
 			Employee e = employees.get(i);
 
 			if (dataTable.size() == 0) {
 				String[] tableHeading = { "No", "Employee ID", "Nama", "Placement", "Allowance", "Salary" };
 				columnCount = tableHeading.length;
 				dataTable.add(tableHeading);
-			} else if (i == employees.size()) {
-
-				String[] tableFooter = { "", "", "", "", "Total Payroll", "200000" };
-				dataTable.add(tableFooter);
-			} else {
-				String allowance = "";
-				if (e instanceof Programmer) {
-					allowance = String.format("%,.0f", (double) ((Programmer) e).getAllowance());
-				}
-
-				else if (e instanceof ProjectLeader) {
-					allowance = String.format("%,.0f", (double) ((ProjectLeader) e).getAllowance());
-				}
-
-				else if (e instanceof Analyst) {
-					allowance = String.format("%,.0f", (double) ((Analyst) e).getAllowance());
-				}
-
-				else if (!(e instanceof Analyst) && !(e instanceof Programmer) && !(e instanceof ProjectLeader)) {
-					allowance = "-";
-
-				}
-
-				String[] tableBody = { String.valueOf(no), e.getEmployeeId(), e.getName(), e.getPlacement().getCity(),
-						allowance, String.format("%,.0f", (double) e.getSalary()) };
-				dataTable.add(tableBody);
 			}
+
+			String allowance = "";
+			if (e instanceof Programmer) {
+				allowance = String.format("%,.0f", (double) ((Programmer) e).getAllowance());
+			}
+
+			else if (e instanceof ProjectLeader) {
+				allowance = String.format("%,.0f", (double) ((ProjectLeader) e).getAllowance());
+			}
+
+			else if (e instanceof Analyst) {
+				allowance = String.format("%,.0f", (double) ((Analyst) e).getAllowance());
+			}
+
+			else if (!(e instanceof Analyst) && !(e instanceof Programmer) && !(e instanceof ProjectLeader)) {
+				allowance = "-";
+
+			}
+
+			String[] tableBody = { String.valueOf(no), e.getEmployeeId(), e.getName(), e.getPlacement().getCity(), allowance, String.format("%,.0f", (double) e.getSalary()) };
+			dataTable.add(tableBody);
+
+			totalPayroll += e.getSalary();
+			if (dataTable.size() > employees.size()) {
+
+				String[] tableHeading = { "", "", "", "", "Total", String.format("%,.0f", (double) totalPayroll) };
+				dataTable.add(tableHeading);
+			}
+
 			no++;
 
 		}
@@ -143,7 +145,6 @@ public class MenuDataPayroll {
 			} else {
 				setting += separator + " %-" + listColumnWidht[i] + "s ";
 			}
-
 		}
 		setting += "|";
 
@@ -151,18 +152,57 @@ public class MenuDataPayroll {
 		System.out.println("   " + lines);
 		for (int i = 0; i < dataTable.size(); i++) {
 			if (i == 0) {
-				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2],
-						dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5]);
+				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5]);
 				System.out.println();
 				System.out.println("   " + lines);
-			} else {
-				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2],
-						dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5]);
+			} else if (i > 0 && i < dataTable.size() - 1) {
+
+				System.out.printf("   " + setting, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5]);
+				System.out.println();
+			} else if (i == dataTable.size() - 1) {
+				
+				
+				String settingExtended = "";
+				for (int x = 0; x < listColumnWidht.length; x++) {
+
+					if (x == 5 || x == 6) {
+						settingExtended += "|" + " %" + listColumnWidht[x] + "s |";
+					}else if (x == 0) {
+						settingExtended += "|" + " %" + listColumnWidht[x] + "s ";
+					}
+					
+					else {
+						settingExtended += " " + " %" + listColumnWidht[x] + "s ";
+					}
+				}
+
+
+				System.out.println("   " + lines);
+				System.out.printf("   " + settingExtended, dataTable.get(i)[0], dataTable.get(i)[1], dataTable.get(i)[2], dataTable.get(i)[3], dataTable.get(i)[4], dataTable.get(i)[5]);
 				System.out.println();
 			}
 
 		}
-		System.out.println("   " + lines);
+		
+		
+		
+		String linesExtended = "+";
+		for (int x = 0; x < listColumnWidht.length; x++) {
+			String line = "--";
+			for (int j = 0; j < listColumnWidht[x]; j++) {
+				line += "-";
+			}
+			
+			if(x == listColumnWidht.length -1 || x == listColumnWidht.length -2) {
+				linesExtended += line + "+";
+			} 
+			
+			else {
+				linesExtended += line + "-";
+			}
+			
+		}
+		System.out.println("   " + linesExtended);
 	}
 
 }

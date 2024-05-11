@@ -49,6 +49,10 @@ class Placement{
 }
 
 
+class ReoEmployee{
++getAllEmployee()
+}
+
 interface ISalaryCalculation{
 +calculateSalary()
 }
@@ -63,7 +67,6 @@ interface IProjectLeaderAllowance{
 }
 
 interface IAnalystrAllowance{
-+
 +calculateAnalystAllowance()
 }
 
