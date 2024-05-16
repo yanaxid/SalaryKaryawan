@@ -3,7 +3,6 @@ package menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import person.employee.Analyst;
 import person.employee.Employee;
 import person.employee.Programmer;
 import person.employee.ProjectLeader;
@@ -55,6 +54,10 @@ public class MenuDisplayEmployees {
 
 	}
 
+	
+	String[] tableHeading = { "No", "Employee ID", "Nama", "Address", "Age", "Placement", "JobDesk", "Dll" };
+	
+	
 	public void createTableEmployee(List<Employee> employees) {
 
 		List<String[]> dataTable = new ArrayList<>();

@@ -149,7 +149,7 @@ public class MenuEditEmployee {
 					
 					EmployeePlacement placement = inputEditPlacement(mainMenu, emp);
 					
-					String o = emp.getPlacement().getCity();
+					String placementCity = emp.getPlacement().getCity();
 
 					if (emp instanceof Programmer) {
 						((Programmer) emp).setPlacement(placement);
@@ -164,11 +164,12 @@ public class MenuEditEmployee {
 						((Analyst) emp).setSalary(((Analyst) emp).calculateSalary());
 						((Analyst) emp).setAllowance(((Analyst) emp).calculateAnalystAllowance());
 					} else if (!(emp instanceof Programmer) && !(emp instanceof ProjectLeader) && !(emp instanceof Analyst)) {
+						//employee
 						emp.setPlacement(placement);
 						emp.setSalary(emp.calculateSalary());
 					}
 					
-					mainMenu.displaySuccessMessage("   Berhasil merubah placement "+ emp.getEmployeeId()+" : "+o+" > " +emp.getPlacement().getCity());
+					mainMenu.displaySuccessMessage("   Berhasil merubah placement "+ emp.getEmployeeId()+" : "+placementCity+" > " +emp.getPlacement().getCity());
 					showEditEmployee(mainMenu);
 					break;
 

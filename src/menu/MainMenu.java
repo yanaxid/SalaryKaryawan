@@ -1,6 +1,5 @@
 package menu;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class MainMenu {
 	//
 	private MenuAddEmployee menuAddEmployee = new MenuAddEmployee();
 	private MenuDisplayEmployees menuDisplayEmployees = new MenuDisplayEmployees();
-	private MenuDataPayroll menuDataPayroll = new MenuDataPayroll();
+	MenuDataPayroll menuDataPayroll = new MenuDataPayroll();
 	private MenuDeleteEmployee menuDeleteEmployee = new MenuDeleteEmployee();
 	private MenuSearchEmployee menuSearchEmployee = new MenuSearchEmployee();
 	private MenuEditEmployee menuEditEmployee = new MenuEditEmployee();
@@ -68,7 +67,7 @@ public class MainMenu {
 				break;
 			}
 			case 4: {
-				getMenuDataPayroll().showTablePayroll(this);
+				menuDataPayroll.showTablePayroll(this);
 				break;
 			}
 			case 5: {
@@ -146,6 +145,5 @@ public class MainMenu {
 	public RepoEmployee getRepoEmployee() {
 		return repoEmployee;
 	}
-
 
 }
