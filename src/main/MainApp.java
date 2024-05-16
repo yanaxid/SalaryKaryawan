@@ -9,7 +9,7 @@ public class MainApp {
 		MainMenu mainMenu = new MainMenu();
 		
 		mainMenu.mainMenu();
-		System.out.println("terimaksih");
+		System.out.println("Terimaksih");
 
 	}
 
